@@ -84,3 +84,12 @@ When deploying to Vercel, set these environment variables in Project Settings:
 - `JWT_SECRET`
 
 If these are missing, auth endpoints like `/api/auth/login` and `/api/auth/register` will return `500`.
+
+## password
+-admin 
+id:-admin@gmail.com 
+pwd:-admin123
+
+-user
+id:-updeshkushwaha2114@gmail.com
+pwd:-admin123
