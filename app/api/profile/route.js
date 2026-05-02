@@ -6,6 +6,8 @@ import { jsonOk, jsonErr } from "@/lib/api-response";
 import { profileUpdateSchema } from "@/lib/validators";
 import { serializeUser } from "@/lib/serialize";
 
+export const runtime = "nodejs";
+
 /** Authenticated member (or admin) updates their own profile email */
 export async function PATCH(request) {
   try {

@@ -7,6 +7,8 @@ import { getSessionUser, assertRole } from "@/lib/auth-context";
 import { jsonOk, jsonErr } from "@/lib/api-response";
 import { patchProjectSchema } from "@/lib/validators";
 
+export const runtime = "nodejs";
+
 function projectJson(doc) {
   const o = doc.toObject?.() ?? doc;
   const members = Array.isArray(o.members)

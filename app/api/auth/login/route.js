@@ -5,6 +5,15 @@ import { loginSchema } from "@/lib/validators";
 import { jsonErr, jsonOk } from "@/lib/api-response";
 import { signToken } from "@/lib/jwt";
 
+export const runtime = "nodejs";
+
+function safeServerMisconfigMessage(e) {
+  const msg = typeof e?.message === "string" ? e.message : "";
+  if (msg.includes("MONGODB_URI")) return "Server misconfigured: MONGODB_URI is missing";
+  if (msg.includes("JWT_SECRET")) return "Server misconfigured: JWT_SECRET is missing";
+  return null;
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -52,6 +61,8 @@ export async function POST(request) {
     return res;
   } catch (e) {
     console.error(e);
+    const configMsg = safeServerMisconfigMessage(e);
+    if (configMsg) return jsonErr(configMsg, 500);
     return jsonErr("Server error", 500);
   }
 }

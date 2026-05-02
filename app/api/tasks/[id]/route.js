@@ -7,6 +7,8 @@ import { jsonOk, jsonErr } from "@/lib/api-response";
 import { patchTaskAdminSchema, patchTaskMemberSchema } from "@/lib/validators";
 import { taskJson } from "@/lib/task-json";
 
+export const runtime = "nodejs";
+
 async function loadPopulated(taskId) {
   return Task.findById(taskId)
     .populate({ path: "assignee", select: "name email role isActive avatarUrl" })

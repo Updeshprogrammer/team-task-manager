@@ -5,6 +5,8 @@ import { jsonOk, jsonErr } from "@/lib/api-response";
 import { serializeUser } from "@/lib/serialize";
 import { deleteStoredAvatar, extForMime, writeAvatar } from "@/lib/avatar-storage";
 
+export const runtime = "nodejs";
+
 const MAX_BYTES = 2 * 1024 * 1024;
 
 export async function POST(request) {

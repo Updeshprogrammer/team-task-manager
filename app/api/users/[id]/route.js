@@ -7,6 +7,8 @@ import { getSessionUser, assertRole } from "@/lib/auth-context";
 import { jsonOk, jsonErr } from "@/lib/api-response";
 import { userAdminPatchSchema } from "@/lib/validators";
 
+export const runtime = "nodejs";
+
 function isOid(id) {
   return mongoose.Types.ObjectId.isValid(id);
 }

@@ -7,6 +7,8 @@ import { jsonOk, jsonErr } from "@/lib/api-response";
 import { createTaskSchema } from "@/lib/validators";
 import { taskJson } from "@/lib/task-json";
 
+export const runtime = "nodejs";
+
 async function populateTaskQuery(q) {
   return q
     .populate({ path: "assignee", select: "name email role isActive avatarUrl" })
