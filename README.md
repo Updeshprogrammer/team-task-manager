@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Team Task Manager
 
-## Getting Started
+A role-based task management app built with Next.js App Router and MongoDB.
 
-First, run the development server:
+Admins can manage users, projects, and tasks. Members can track and update their assigned tasks with status changes and remarks.
+
+## Features
+
+- JWT cookie authentication (`/api/auth/login`, `/api/auth/register`, `/api/auth/logout`, `/api/auth/me`)
+- Role-based access (`admin`, `member`) with route protection in `middleware.js`
+- Project management (`/api/projects`, `/api/projects/[id]`)
+- Task management (`/api/tasks`, `/api/tasks/[id]`)
+- User administration (`/api/users`, `/api/users/[id]`)
+- Profile update + avatar upload (`/api/profile`, `/api/profile/avatar`)
+- Validation with Zod and persistence with Mongoose
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19
+- MongoDB + Mongoose
+- Zod
+- JOSE (JWT signing/verification)
+- bcryptjs
+
+## Project Structure
+
+- `app/` - pages, layouts, API routes
+- `app/api/` - REST API handlers
+- `models/` - MongoDB models (`User`, `Project`, `Task`)
+- `lib/` - auth, db connection, validators, serializers, helpers
+- `middleware.js` - auth + role-based route guard
+
+## Local Setup
+
+### 1) Install dependencies
+
+```bash
+npm install
+```
+
+### 2) Create environment variables
+
+Create `.env.local` in the project root:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_long_random_secret_at_least_16_chars
+```
+
+### 3) Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App runs at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - start development server
+- `npm run build` - create production build
+- `npm run start` - run production server
+- `npm run lint` - run ESLint
 
-## Learn More
+## Roles and Access
 
-To learn more about Next.js, take a look at the following resources:
+- `admin`
+  - Manage users
+  - Create/update/delete projects
+  - Create/update/delete tasks
+- `member`
+  - View and update own assigned tasks
+  - Add remarks to own tasks
+  - Update own profile
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Newly registered users are created as `member` by default.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment (Vercel)
 
-## Deploy on Vercel
+When deploying to Vercel, set these environment variables in Project Settings:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `MONGODB_URI`
+- `JWT_SECRET`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If these are missing, auth endpoints like `/api/auth/login` and `/api/auth/register` will return `500`.
