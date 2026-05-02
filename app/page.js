@@ -53,9 +53,7 @@ export default function Home() {
         ))}
       </div>
 
-      <p className="mt-24 text-[11px] text-slate-400">
-        Copy `.env.example` → `.env.local`, wire MongoDB, run `npm run db:seed` for admins.
-      </p>
+      
     </div>
   );
 }
